@@ -20,8 +20,8 @@ def webhook(request):
     if intent == "Course Registration":
         #extract from database
         dept_name = req.get('queryResult').get('parameters').get('dept_name')
-        registration_details =  registration.objects.filter(branch=dept_name).values('venue')
+        registration_details =  registration.objects.filter(branch=dept_name).values('venue', 'start_time' , 'end_time')
         print(registration_details)
-        fulfillmentText = {'fulfillmentText': 'The venue of registration for '+ dept_name + ' is ' + registration_details[0]['venue'] + '.'}
+        fulfillmentText = {'fulfillmentText': 'Registration for '+ dept_name + ' is ' + ' from ' + registration_details[0]['start_time'].strftime("%H:%M") + ' to ' + registration_details[0]['end_time'].strftime("%H:%M") + ' on ' + registration_details[0]['end_time'].strftime("%d-%m-%Y") + ' at '  + registration_details[0]['venue'] }
     # return response
     return JsonResponse(fulfillmentText, safe=False)
