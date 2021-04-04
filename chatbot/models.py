@@ -38,7 +38,7 @@ class RegistrationDetails(models.Model):
         verbose_name_plural = "Registration Details"
 
     def __str__(self):
-        return self.dept
+        return self.dept.dept_name
 
 
 class Slot(models.Model):
@@ -78,6 +78,8 @@ class course(models.Model):
     references = models.TextField(max_length=500)
     compulsary = models.BooleanField()
     semester = models.IntegerField()
+    elective = models.BooleanField()
+    lab = models.BooleanField()
 
     class Meta:
         verbose_name_plural = "Courses"
